@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/model/darktheme_provider.dart';
-import 'package:portfolio/model/styles.dart';
+import 'package:portfolio/darktheme_provider.dart';
+import 'package:portfolio/routes/blogpage.dart';
+import 'package:portfolio/routes/homepage.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:portfolio/model/styles.dart';
+import 'package:portfolio/routes/aboutme.dart';
+import './routes/aboutme.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,66 +37,20 @@ class _MyAppState extends State<MyApp> {
         return themeChangeProvider;
       },
       child: Consumer<DarkThemeProvider>(
-        builder: (BuildContext context, value, Widget child) {
+        builder: (BuildContext context, value, Widget? child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-            home: MyHomePage(),
+             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
+           
+            initialRoute: MyHomePage.route,
+            routes: {
+              MyHomePage.route: (context) => MyHomePage(),
+              AboutPage.route: (context) => AboutPage(),
+              BlogPage.route: (context) => BlogPage()
+            },
           );
         },
       ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  _launchURL() async {
-    const url = 'https://flutter.io';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final themeChange = Provider.of<DarkThemeProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 68,
-        title: GestureDetector(
-          onTap: _launchURL,
-          child: Row(
-            children: [
-              Text('>'),
-              Text(
-                ' \$',
-                style: TextStyle(fontSize: 16, height: 1.5),
-              ),
-              Text('  cd  /home/')
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              themeChange.darkTheme ? Icons.brightness_2 : Icons.wb_sunny,
-            ),
-            onPressed: () {
-              setState(() {
-                themeChange.darkTheme = !themeChange.darkTheme;
-              });
-            },
-          )
-        ],
-      ),
-      body: Center(),
     );
   }
 }
