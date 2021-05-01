@@ -25,8 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     bool _screenLargeSmall = screenSize.width > 1300 || screenSize.width < 800;
-    bool smallWidth = screenSize.width < 800;
-    print('screen size : ${screenSize.width}');
+    bool smallWidth = screenSize.width < 800; 
     return Scaffold(
       appBar: MyAppBar(),
       body: Align(
@@ -41,15 +40,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: AnimatedContainer(
                     duration: Duration(milliseconds: 500),
                     height: _screenLargeSmall
-                        ? screenSize.height * 0.21
+                        ? screenSize.height * 0.19
                         : screenSize.width * 0.19,
                     width: _screenLargeSmall
-                        ? screenSize.height * 0.21
+                        ? screenSize.height * 0.19
                         : screenSize.width * 0.19,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: AssetImage("myDP.png"),
+                          image: AssetImage('assets/dp.png'),
                         )),
                   )),
               Text('Naveen K',
@@ -86,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: const EdgeInsets.only(top: 80, bottom: 30),
                   child: logos()),
               Copyright(
-                launchurl: launchURL,
+                launchurl: launchURL,smallsize:smallWidth
               ),
               SizedBox(height: 30),
             ],
