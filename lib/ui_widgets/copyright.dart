@@ -10,7 +10,7 @@ class Copyright extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(' © 2020 ', style: TextStyle(fontSize: 17)),
+        Text(' © 2021 ', style: TextStyle(fontSize: 17)),
         Text(
           " · ",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
