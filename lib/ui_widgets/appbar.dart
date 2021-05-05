@@ -12,8 +12,9 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _MyAppBarState extends State<MyAppBar> {
+  
   _launchURL() async {
-    const url = 'https://flutter.io';
+    const url = 'https://naveenkmavoor.tech';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -33,12 +34,12 @@ class _MyAppBarState extends State<MyAppBar> {
         onTap: _launchURL,
         child: Row(
           children: [
-          
             Text(
               '> \$  cd  /home/',
               style: TextStyle(
-                  fontSize: 18, 
-                  letterSpacing: 1, ),
+                fontSize: 18,
+                letterSpacing: 1,
+              ),
             ),
             SizedBox(
               width: 5,

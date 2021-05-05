@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/ui_widgets/appbar.dart';
 import 'package:portfolio/ui_widgets/copyright.dart';
 import 'package:portfolio/routes/aboutme.dart';
-import 'package:portfolio/routes/blogpage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -25,70 +24,86 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     bool _screenLargeSmall = screenSize.width > 1300 || screenSize.width < 800;
-    bool smallWidth = screenSize.width < 800; 
+    bool smallWidth = screenSize.width < 800;
     return Scaffold(
       appBar: MyAppBar(),
       body: Align(
         alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              AnimatedPadding(
-                  duration: Duration(seconds: 1),
-                  padding:
-                      EdgeInsets.only(top: smallWidth ? 15 : 30, bottom: 37),
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    height: _screenLargeSmall
-                        ? screenSize.height * 0.19
-                        : screenSize.width * 0.19,
-                    width: _screenLargeSmall
-                        ? screenSize.height * 0.19
-                        : screenSize.width * 0.19,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage('assets/dp.png'),
-                        )),
-                  )),
-              Text('Naveen K',
-                  style: TextStyle(
-                    fontSize: 42,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                  )),
-              SizedBox(
-                height: 35,
-              ),
-              Text('Software Engineer',
-                  style: TextStyle(
-                    letterSpacing: 2,
-                    fontSize: 22,
-                  )),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 50,
-                  bottom: 15,
+        child: Scrollbar(
+          isAlwaysShown: true,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                AnimatedPadding(
+                    duration: Duration(seconds: 1),
+                    padding:
+                        EdgeInsets.only(top: smallWidth ? 15 : 40, bottom: 37),
+                    child: AnimatedContainer(
+                      constraints: BoxConstraints(
+                          maxHeight: 190,
+                          maxWidth: 190,
+                          minHeight: 100,
+                          minWidth: 100),
+                      duration: Duration(milliseconds: 500),
+                      height: _screenLargeSmall
+                          ? screenSize.height * 0.18
+                          : screenSize.width * 0.19,
+                      width: _screenLargeSmall
+                          ? screenSize.height * 0.18
+                          : screenSize.width * 0.19,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xff737373),
+                              Color(0xff8C8C8C),
+                              Color(0xffA6A6A6),
+                              Color(0xffBFBFBF),
+                              Color(0xffD9D9D9),
+                              Color(0xffBFBFBF),
+                              Color(0xffA6A6A6),
+                              Color(0xff8C8C8C), 
+                              Color(0xff737373),
+                            ],
+                          ),
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: AssetImage('assets/dp.png'),
+                          )),
+                    )),
+                Text('Naveen K',
+                    style: TextStyle(
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2,
+                    )),
+                SizedBox(
+                  height: 35,
                 ),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  child: boxes('About me'),
-                  onTap: () => Navigator.of(context).pushNamed(AboutPage.route),
+                Text('Software Engineer',
+                    style: TextStyle(
+                      letterSpacing: 2,
+                      fontSize: 22,
+                    )),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 50,
+                    bottom: 15,
+                  ),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(10),
+                    child: boxes('About me'),
+                    onTap: () =>
+                        Navigator.of(context).pushNamed(AboutPage.route),
+                  ),
                 ),
-              ),
-              InkWell(
-                borderRadius: BorderRadius.circular(10),
-                child: boxes('Blog'),
-                onTap: () => Navigator.of(context).pushNamed(BlogPage.route),
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(top: 80, bottom: 30),
-                  child: logos()),
-              Copyright(
-                launchurl: launchURL,smallsize:smallWidth
-              ),
-              SizedBox(height: 30),
-            ],
+                resumeButton(),
+                Padding(
+                    padding: const EdgeInsets.only(top: 80, bottom: 30),
+                    child: logos()),
+                Copyright(launchurl: launchURL, smallsize: smallWidth),
+                SizedBox(height: 30),
+              ],
+            ),
           ),
         ),
       ),
@@ -149,5 +164,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  Widget resumeButton() {
+    final _resumeUrl =
+        'https://drive.google.com/file/d/1VijwswRvooZQ0n3mWbS6ZpRNW3_xOKFp/view?usp=sharing';
+    return InkWell(
+        borderRadius: BorderRadius.circular(10),
+        child: boxes('Resume'),
+        onTap: () => launchURL(_resumeUrl));
   }
 }

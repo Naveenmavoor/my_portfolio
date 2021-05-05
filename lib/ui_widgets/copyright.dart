@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Copyright extends StatelessWidget {
   final Function? launchurl;
   final bool smallsize;
-  final url = 'https://naveenmavoor.github.io';
+  final url = 'https://naveenkmavoor.tech';
   Copyright({this.launchurl, this.smallsize = false});
 
   @override
