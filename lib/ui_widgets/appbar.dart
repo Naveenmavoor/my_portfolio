@@ -1,9 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:universal_html/html.dart' as html;
+
 import 'package:portfolio/animation.dart';
 import 'package:portfolio/darktheme_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   Size get preferredSize => new Size.fromHeight(68);
@@ -12,14 +14,10 @@ class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _MyAppBarState extends State<MyAppBar> {
-  
+  final _url = "https://naveenkmavoor.tech";
+
   _launchURL() async {
-    const url = 'https://naveenkmavoor.tech';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+    html.window.location.assign(_url);
   }
 
   @override
@@ -30,22 +28,24 @@ class _MyAppBarState extends State<MyAppBar> {
       automaticallyImplyLeading: false,
       toolbarHeight: 68,
       titleSpacing: pow((screenSize.width / 79), 2) as double?,
-      title: GestureDetector(
-        onTap: _launchURL,
-        child: Row(
-          children: [
-            Text(
-              '> \$  cd  /home/',
-              style: TextStyle(
-                fontSize: 18,
-                letterSpacing: 1,
+      title: MouseRegion(cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: _launchURL,
+          child: Row(
+            children: [
+              Text(
+                '> \$  cd  /home/',
+                style: TextStyle(
+                  fontSize: 18,
+                  letterSpacing: 1,
+                ),
               ),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            AnimateFadeTransition(),
-          ],
+              SizedBox(
+                width: 5,
+              ),
+              AnimateFadeTransition(),
+            ],
+          ),
         ),
       ),
       actions: <Widget>[

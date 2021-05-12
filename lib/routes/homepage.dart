@@ -6,7 +6,7 @@ import 'package:portfolio/routes/aboutme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyHomePage extends StatefulWidget {
-  static const String route = '/';
+  static const String route = '';
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -25,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final screenSize = MediaQuery.of(context).size;
     bool _screenLargeSmall = screenSize.width > 1300 || screenSize.width < 800;
     bool smallWidth = screenSize.width < 800;
-    return Scaffold(
+    return Scaffold(  
       appBar: MyAppBar(),
       body: Align(
         alignment: Alignment.topCenter,
@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 AnimatedPadding(
                     duration: Duration(seconds: 1),
                     padding:
-                        EdgeInsets.only(top: smallWidth ? 15 : 40, bottom: 37),
+                        EdgeInsets.only(top: smallWidth ? 30 : 40, bottom: 37),
                     child: AnimatedContainer(
                       constraints: BoxConstraints(
                           maxHeight: 190,
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(
                     padding: const EdgeInsets.only(top: 80, bottom: 30),
                     child: logos()),
-                Copyright(launchurl: launchURL, smallsize: smallWidth),
+                Copyright( smallsize: smallWidth),
                 SizedBox(height: 30),
               ],
             ),
@@ -119,28 +119,28 @@ class _MyHomePageState extends State<MyHomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
-          splashRadius: 30,
+          splashRadius: 25,
           icon: Icon(FontAwesomeIcons.twitter),
           onPressed: () => launchURL(_twitterUrl),
         ),
         Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            padding: EdgeInsets.symmetric(horizontal: 25),
             child: IconButton(
-              splashRadius: 30,
+              splashRadius: 25,
               icon: Icon(
                 FontAwesomeIcons.instagram,
               ),
               onPressed: () => launchURL(_instaUrl),
             )),
         IconButton(
-            splashRadius: 30,
+            splashRadius: 25,
             icon: Icon(FontAwesomeIcons.linkedin),
             onPressed: () => launchURL(_linkedinUrl)),
         SizedBox(
-          width: 30,
+          width: 25,
         ),
         IconButton(
-          splashRadius: 30,
+          splashRadius: 25,
           icon: Icon(FontAwesomeIcons.github),
           onPressed: () => launchURL(_githubUrl),
         ),
